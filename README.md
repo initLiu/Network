@@ -37,26 +37,26 @@ public class JsonConverterFactory extends Converter.Factory {
 }
 ```
 # 使用方法
+## Get
 ```java
- private void getRequest() {
-        RequestParams params = new GetRequestParams("https://iauth-sandbox.wecity.qq.com/config/webappconfig/");
-        params.addFilter("appid", "sdk_4396");
-        NetRequest.getInstance().request(params);
- }
+RequestParams params = new GetRequestParams("http://xxx.xxx.xxx");
+params.addFilter("xxxx", "ddddddd");
+NetRequest.getInstance().request(params);
+```
 
-    private void postRequest() {
-        RequestParams params = new PostRequestParams("https://iauth-sandbox.wecity.qq.com/new/cgi-bin/", "appauth.php")
-                .setContentType("application/json")
-                .addFilter("appid", "4396").addFilter("type", "0").addFilter("uid", "asdadfadsf")
-                .addHeader("signature", getSignature("appauth"));
+## post
+```java
+RequestParams params = new PostRequestParams("https://xxx.xx.xxx", "xxxx")
+        .setContentType("application/json")
+        .addFilter("xxx", "xxx").addFilter("xxx", "xx").addFilter("xx", "xxx")
+        .addHeader("xxx", "xxxx");
 
-        NetRequest.getInstance().request(params);
-    }
-    
-    private void formUrlencode(){
-         RequestParams params = new FormUePostRequestParams("https://iauth-sandbox.wecity.qq.com/new/cgi-bin/", "appauth.php")
-         .addFilter("appid", "4396").addFilter("type", "0").addFilter("uid", "asdadfadsf")
-         .addHeader("signature", getSignature("appauth"));
-    }
-    
+NetRequest.getInstance().request(params);
+```
+
+## formUrlEncode
+```java
+RequestParams params = new FormUePostRequestParams("https://xxx.xxx.xxx", "xxx")
+        .addFilter("xxx", "xxx").addFilter("xxx", "0").addFilter("xxx", "asdadfadsf")
+        .addHeader("xxx", "xxxx");
 ```
