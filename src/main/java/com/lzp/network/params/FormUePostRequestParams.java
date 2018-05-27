@@ -2,14 +2,14 @@ package com.lzp.network.params;
 
 import com.lzp.network.service.NetInterface;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 
 /**
  * Created by lillian on 2018/4/29.
  */
 
-public class FormUePostRequestParams extends RequestParams {
-    private String mContentType;
+public class FormUePostRequestParams<T> extends RequestParams<T> {
 
     public FormUePostRequestParams(String baseUrl) {
         super(baseUrl);
@@ -20,7 +20,7 @@ public class FormUePostRequestParams extends RequestParams {
     }
 
     @Override
-    public Call<String> createCall(NetInterface netInterface) {
+    public Call<ResponseBody> createCall(NetInterface netInterface) {
         return netInterface.postRequestWithFormUrlEncode(getPath(), getFilters(), getHeaders());
     }
 }

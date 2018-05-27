@@ -3,6 +3,7 @@ package com.lzp.network.service;
 import java.util.Map;
 
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.FieldMap;
@@ -19,12 +20,12 @@ import retrofit2.http.Url;
 
 public interface NetInterface {
     @GET
-    Call<String> getRequest(@Url String url, @QueryMap Map<String, String> filters, @HeaderMap Map<String, String> headers);
+    Call<ResponseBody> getRequest(@Url String url, @QueryMap Map<String, String> filters, @HeaderMap Map<String, String> headers);
 
     @POST
-    Call<String> postRequest(@Url String url, @Body RequestBody data, @HeaderMap Map<String, String> headers);
+    Call<ResponseBody> postRequest(@Url String url, @Body RequestBody data, @HeaderMap Map<String, String> headers);
 
     @FormUrlEncoded
     @POST
-    Call<String> postRequestWithFormUrlEncode(@Url String url, @FieldMap Map<String, String> datas, @HeaderMap Map<String, String> headers);
+    Call<ResponseBody> postRequestWithFormUrlEncode(@Url String url, @FieldMap Map<String, String> datas, @HeaderMap Map<String, String> headers);
 }

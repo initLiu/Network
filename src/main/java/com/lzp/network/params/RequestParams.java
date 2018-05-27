@@ -1,28 +1,29 @@
 package com.lzp.network.params;
 
-import com.lzp.network.service.NetInterface;
+import com.lzp.network.convert.AbstractContentConvert;
+import com.lzp.network.convert.Codec;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import retrofit2.Call;
-
 /**
  * Created by lillian on 2018/4/29.
  */
 
-public abstract class RequestParams implements RetrofitCallInterface<String> {
+public abstract class RequestParams<T> implements RetrofitCallInterface {
     private Map<String, String> mHeaders = Collections.EMPTY_MAP;
     private Map<String, String> mFilters = Collections.EMPTY_MAP;
     private String mBaseUrl;
     private String mPath;
+    protected AbstractContentConvert<T> mConvert;
+    private Callback<T> mCallback;
 
     /**
      * @param baseUrl base servel url,must not be null
      */
     public RequestParams(String baseUrl) {
-        mBaseUrl = baseUrl;
+        this(baseUrl, null);
     }
 
     /**
@@ -52,7 +53,7 @@ public abstract class RequestParams implements RetrofitCallInterface<String> {
 
     public RequestParams addHeader(String key, String value) {
         if (mHeaders == Collections.EMPTY_MAP) {
-            mHeaders = new HashMap<String, String>();
+            mHeaders = new HashMap<>();
         }
         mHeaders.put(key, value);
         return this;
@@ -62,7 +63,7 @@ public abstract class RequestParams implements RetrofitCallInterface<String> {
         if (headers == null || headers.size() == 0) return this;
 
         if (mHeaders == Collections.EMPTY_MAP) {
-            mHeaders = new HashMap<String, String>();
+            mHeaders = new HashMap<>();
         }
         mHeaders.putAll(headers);
         return this;
@@ -84,6 +85,26 @@ public abstract class RequestParams implements RetrofitCallInterface<String> {
         }
         mFilters.putAll(filters);
         return this;
+    }
+
+    public RequestParams setContentConvert(AbstractContentConvert<T> convert) {
+        if (convert == null)
+            return this;
+        mConvert = convert;
+        return this;
+    }
+
+    public Codec<T> getContentConvert() {
+        return mConvert;
+    }
+
+    public RequestParams setCallback(Callback<T> callback) {
+        mCallback = callback;
+        return this;
+    }
+
+    public Callback<T> getCallback() {
+        return mCallback;
     }
 
     public String getEncodedFilters() {
