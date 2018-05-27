@@ -51,7 +51,7 @@ public abstract class RequestParams<T> implements RetrofitCallInterface {
         return mFilters;
     }
 
-    public RequestParams addHeader(String key, String value) {
+    public RequestParams<T> addHeader(String key, String value) {
         if (mHeaders == Collections.EMPTY_MAP) {
             mHeaders = new HashMap<>();
         }
@@ -59,7 +59,7 @@ public abstract class RequestParams<T> implements RetrofitCallInterface {
         return this;
     }
 
-    public RequestParams addHeader(Map<String, String> headers) {
+    public RequestParams<T> addHeader(Map<String, String> headers) {
         if (headers == null || headers.size() == 0) return this;
 
         if (mHeaders == Collections.EMPTY_MAP) {
@@ -69,7 +69,7 @@ public abstract class RequestParams<T> implements RetrofitCallInterface {
         return this;
     }
 
-    public RequestParams addFilter(String key, String value) {
+    public RequestParams<T> addFilter(String key, String value) {
         if (mFilters == Collections.EMPTY_MAP) {
             mFilters = new HashMap<>();
         }
@@ -77,7 +77,7 @@ public abstract class RequestParams<T> implements RetrofitCallInterface {
         return this;
     }
 
-    public RequestParams addFilter(Map<String, String> filters) {
+    public RequestParams<T> addFilter(Map<String, String> filters) {
         if (filters == null || filters.size() == 0) return this;
 
         if (mFilters == Collections.EMPTY_MAP) {
@@ -87,7 +87,7 @@ public abstract class RequestParams<T> implements RetrofitCallInterface {
         return this;
     }
 
-    public RequestParams setContentConvert(AbstractContentConvert<T> convert) {
+    public RequestParams<T> setContentConvert(AbstractContentConvert<T> convert) {
         if (convert == null)
             return this;
         mConvert = convert;
@@ -98,7 +98,7 @@ public abstract class RequestParams<T> implements RetrofitCallInterface {
         return mConvert;
     }
 
-    public RequestParams setCallback(Callback<T> callback) {
+    public RequestParams<T> setCallback(Callback<T> callback) {
         mCallback = callback;
         return this;
     }
